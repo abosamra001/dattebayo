@@ -22,7 +22,7 @@ class WelcomeShinobi extends StatelessWidget {
               ],
               begin: .bottomCenter,
               end: .topCenter,
-              stops: [0.2, 0.8],
+              stops: const [0.2, 0.8],
             ),
           ),
           child: Image.asset('assets/images/png/onboarding_background.png'),
