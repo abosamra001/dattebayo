@@ -4,25 +4,68 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTextStyles {
-  static final font30WhiteBrownExtraBold = TextStyle(
-    fontSize: 30.sp,
+  // main orange
+  static final font12MainOrangeBold = TextStyle(
+    fontSize: 12.sp,
+    color: ColorManager.mainColor,
+    fontWeight: FontWeightHelper.bold,
+  );
+  static final font14MainOrangeSemiBold = TextStyle(
+    fontSize: 14.sp,
+    color: ColorManager.mainColor,
+    fontWeight: FontWeightHelper.semiBold,
+  );
+  static final font20MainOrangeBold = TextStyle(
+    fontSize: 20.sp,
+    color: ColorManager.mainColor,
+    fontWeight: FontWeightHelper.bold,
+  );
+
+  // white
+  static final font14WhiteBold = TextStyle(
+    fontSize: 14.sp,
+    color: Colors.white,
+    fontWeight: FontWeightHelper.bold,
+  );
+  static final font20WhiteBold = TextStyle(
+    fontSize: 20.sp,
+    color: Colors.white,
+    fontWeight: FontWeightHelper.bold,
+  );
+
+  // white brown
+  static final font18WhiteBrownRegular = TextStyle(
+    fontSize: 18.sp,
     color: ColorManager.mainFontColor,
-    fontWeight: FontWeightHelper.extraBold,
+    fontWeight: FontWeightHelper.regular,
+  );
+  static final font20WhiteBrownBold = TextStyle(
+    fontSize: 20.sp,
+    color: ColorManager.mainFontColor,
+    fontWeight: FontWeightHelper.bold,
+  );
+  static final font40WhiteBrownLight = TextStyle(
+    fontSize: 40.sp,
+    color: ColorManager.mainFontColor,
+    fontWeight: FontWeightHelper.light,
   );
   static final font30WhiteBrownBold = TextStyle(
     fontSize: 30.sp,
     color: ColorManager.mainFontColor,
     fontWeight: FontWeightHelper.bold,
   );
-  static final font18WhiteBrownRegular = TextStyle(
-    fontSize: 18.sp,
-    color: ColorManager.mainFontColor,
-    fontWeight: FontWeightHelper.regular,
-  );
 
+  // brown
   static final font18BrownBold = TextStyle(
     fontSize: 18.sp,
     color: ColorManager.backgroundColor,
     fontWeight: FontWeightHelper.bold,
+  );
+
+  // blue gray
+  static final font14BlueGrayReqular = TextStyle(
+    fontSize: 14.sp,
+    color: ColorManager.mainFontColor,
+    fontWeight: FontWeightHelper.regular,
   );
 }
