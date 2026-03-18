@@ -19,14 +19,13 @@ class DattebayoApp extends StatelessWidget {
         initialRoute: Routes.onboarding,
         onGenerateRoute: appRouter.onGenerateRoute,
         theme: ThemeData(
-          // brightness: .dark,
+          brightness: .dark,
           appBarTheme: const AppBarTheme(
             backgroundColor: ColorManager.backgroundColor,
             systemOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Colors.transparent,
             ),
           ),
-          canvasColor: ColorManager.backgroundColor,
           scaffoldBackgroundColor: ColorManager.backgroundColor,
           pageTransitionsTheme: const PageTransitionsTheme(
             builders: {

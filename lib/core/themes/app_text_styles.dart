@@ -22,6 +22,11 @@ class AppTextStyles {
   );
 
   // white
+  static final font10WhiteBold = TextStyle(
+    fontSize: 10.sp,
+    color: Colors.white,
+    fontWeight: FontWeightHelper.bold,
+  );
   static final font14WhiteBold = TextStyle(
     fontSize: 14.sp,
     color: Colors.white,
