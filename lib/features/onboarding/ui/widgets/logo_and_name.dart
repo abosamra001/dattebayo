@@ -13,7 +13,7 @@ class LogoAndName extends StatelessWidget {
       mainAxisSize: .min,
       children: [
         Image.asset(
-          'assets/images/png/uzumaki_logo.png',
+          'assets/images/png/konoha_logo.png',
           width: 56.w,
           height: 56.h,
         ),

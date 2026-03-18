@@ -9,3 +9,7 @@ extension NavigationExtension on BuildContext {
 
   void pop() => Navigator.of(this).pop();
 }
+
+extension ListExtension on List? {
+  bool get isNullOrEmpty => this == null || this!.isEmpty;
+}

@@ -1,22 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dattebayo/core/helpers/spacer.dart';
 import 'package:dattebayo/core/themes/app_text_styles.dart';
+import 'package:dattebayo/core/themes/colors.dart';
+import 'package:dattebayo/core/widgets/uzumaki_loading_indicator.dart';
+import 'package:dattebayo/features/characters/data/models/character_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CharacterItem extends StatefulWidget {
-  final String image;
-  final String name;
-  final String occupation;
-  final String team;
-  final VoidCallback onTap;
-  const CharacterItem({
-    super.key,
-    required this.image,
-    required this.name,
-    required this.occupation,
-    required this.team,
-    required this.onTap,
-  });
+  final CharacterModel characterModel;
+  const CharacterItem({super.key, required this.characterModel});
 
   @override
   State<CharacterItem> createState() => _CharacterItemState();
@@ -33,7 +27,7 @@ class _CharacterItemState extends State<CharacterItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.onTap,
+      onTap: () {},
       onTapDown: (_) => _handleTap(true),
       onTapUp: (_) => _handleTap(false),
       onTapCancel: () => _handleTap(false),
@@ -41,27 +35,47 @@ class _CharacterItemState extends State<CharacterItem> {
         alignment: .bottomStart,
         children: [
           Container(
-            foregroundDecoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.white.withValues(alpha: 0.05),
-                width: 1,
-              ),
+            width: 280.w,
+            height: 378.h,
+            // padding: const EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              border: Border.all(color: ColorManager.mainColor, width: 1),
               borderRadius: BorderRadius.circular(12.r),
-              gradient: LinearGradient(
-                colors: [
-                  Colors.black.withValues(alpha: 0.75),
-                  Colors.transparent,
-                ],
+            ),
+            clipBehavior: .antiAlias,
+            foregroundDecoration: BoxDecoration(
+              border: Border.all(color: ColorManager.mainColor, width: 1),
+              borderRadius: BorderRadius.circular(12.r),
+              gradient: const LinearGradient(
+                colors: [Colors.black, Colors.transparent],
                 begin: .bottomCenter,
                 end: .center,
-                stops: const [0, 0.8],
+                stops: [0, 0.9],
               ),
             ),
             child: AnimatedScale(
               scale: isHovering ? 1.08 : 1,
               duration: const Duration(milliseconds: 180),
               curve: Curves.easeOut,
-              child: Image.asset(widget.image, fit: .cover),
+              child: CachedNetworkImage(
+                imageUrl: widget.characterModel.images?.firstOrNull ?? '',
+                fit: .cover,
+                placeholder: (context, url) =>
+                    const Center(child: UzumakiLoadingIndicator()),
+                errorWidget: (context, url, error) {
+                  return Column(
+                    mainAxisAlignment: .center,
+                    children: [
+                      const FaIcon(FontAwesomeIcons.exclamation, size: 36),
+                      verticalSpace(16),
+                      Text(
+                        'No Photo Found',
+                        style: AppTextStyles.font14BlueGrayReqular,
+                      ),
+                    ],
+                  );
+                },
+              ),
             ),
           ),
           Padding(
@@ -70,17 +84,22 @@ class _CharacterItemState extends State<CharacterItem> {
               crossAxisAlignment: .start,
               mainAxisSize: .min,
               children: [
-                Text(widget.team, style: AppTextStyles.font12MainOrangeBold),
+                Text(
+                  widget.characterModel.personal?.team?.firstOrNull ??
+                      'No Team',
+                  style: AppTextStyles.font12MainOrangeBold,
+                ),
                 verticalSpace(2),
                 Text(
-                  widget.name,
+                  widget.characterModel.name ?? 'Ninja',
                   style: AppTextStyles.font20WhiteBold.copyWith(
                     fontFamily: 'Ninja',
                   ),
                 ),
                 verticalSpace(2),
                 Text(
-                  widget.occupation,
+                  widget.characterModel.personal?.occupation?.firstOrNull ??
+                      'Genin',
                   style: AppTextStyles.font14BlueGrayReqular,
                 ),
               ],
