@@ -1,3 +1,4 @@
+import 'package:dattebayo/core/networking/api_error_handler.dart';
 import 'package:dattebayo/core/networking/api_result.dart';
 import 'package:dattebayo/core/networking/api_service.dart';
 import 'package:dattebayo/features/characters/data/models/character_response_model.dart';
@@ -15,7 +16,7 @@ class CharactersRepo {
       final res = await apiService.getAllCharacters(limit: limit, page: page);
       return ApiResult.success(res);
     } catch (error) {
-      return ApiResult.failure(error.toString());
+      return ApiResult.failure(ApiErrorHandler.handle(error));
     }
   }
 }
