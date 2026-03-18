@@ -20,6 +20,7 @@ class AllCharactersScreen extends StatefulWidget {
 
 class _AllCharactersScreenState extends State<AllCharactersScreen> {
   final ScrollController _scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -85,6 +86,7 @@ class _AllCharactersScreenState extends State<AllCharactersScreen> {
     bool isLoadingMore,
   ) {
     return GridView.builder(
+      key: const PageStorageKey('characters_grid'),
       controller: _scrollController,
       itemCount: characters.length + (isLoadingMore ? 1 : 0),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -94,7 +96,6 @@ class _AllCharactersScreenState extends State<AllCharactersScreen> {
         childAspectRatio: 170 / 270,
       ),
       itemBuilder: (context, index) {
-        print("========== length is = ${characters.length} at index $index");
         if (index == characters.length) {
           return const Center(child: UzumakiLoadingIndicator());
         }
