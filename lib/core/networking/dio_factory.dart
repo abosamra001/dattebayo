@@ -20,7 +20,7 @@ class DioFactory {
         requestHeader: true,
         requestBody: true,
         responseHeader: true,
-        responseBody: true,
+        responseBody: false,
       ),
     );
     return _instance!;

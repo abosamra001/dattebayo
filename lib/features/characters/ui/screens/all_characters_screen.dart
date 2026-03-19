@@ -1,6 +1,7 @@
 import 'package:dattebayo/core/themes/app_text_styles.dart';
 import 'package:dattebayo/core/themes/colors.dart';
 import 'package:dattebayo/features/characters/data/models/character_response_model.dart';
+import 'package:dattebayo/features/characters/ui/widgets/characters_shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -64,8 +65,7 @@ class _AllCharactersScreenState extends State<AllCharactersScreen> {
         child: BlocBuilder<CharactersCubit, CharactersState>(
           builder: (context, state) {
             return state.maybeWhen(
-              charactersLoading: () =>
-                  const Center(child: UzumakiLoadingIndicator()),
+              charactersLoading: () => _buildShimmerLoading(),
               charactersLoadingMore: (characters) =>
                   _buildCharacterList(characters, true),
               charactersSuccess: (characters) =>
@@ -100,6 +100,21 @@ class _AllCharactersScreenState extends State<AllCharactersScreen> {
           return const Center(child: UzumakiLoadingIndicator());
         }
         return CharacterCard(character: characters[index]);
+      },
+    );
+  }
+
+  Widget _buildShimmerLoading() {
+    return GridView.builder(
+      itemCount: 6,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 12,
+        mainAxisSpacing: 16,
+        childAspectRatio: 170 / 270,
+      ),
+      itemBuilder: (context, index) {
+        return const CharactersShimmerLoading();
       },
     );
   }
