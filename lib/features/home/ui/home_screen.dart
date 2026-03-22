@@ -1,29 +1,16 @@
-import 'package:dattebayo/core/helpers/spacer.dart';
-import 'package:dattebayo/core/widgets/top_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../core/helpers/audio_manager.dart';
+import '../../../core/helpers/spacer.dart';
 import '../../../core/themes/app_text_styles.dart';
 import '../../../core/themes/colors.dart';
 import 'widgets/explore_more_cards.dart';
 import 'widgets/featured_characters.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  TextEditingController topSearchBarController = TextEditingController();
-  @override
-  void dispose() {
-    topSearchBarController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,31 +38,20 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
         actionsPadding: EdgeInsets.symmetric(horizontal: 16.w),
+        scrolledUnderElevation: 0,
       ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-          child: Column(
-            children: [
-              TopSearchBar(
-                controller: topSearchBarController,
-                onSubmitted: (String? value) {},
-                onChanged: (String? value) {},
-              ),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: .start,
-                    children: [
-                      verticalSpace(30),
-                      const FeaturedCharacters(),
-                      verticalSpace(30),
-                      const ExploreMoreCards(),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: .start,
+              children: [
+                const FeaturedCharacters(),
+                verticalSpace(30),
+                const ExploreMoreCards(),
+              ],
+            ),
           ),
         ),
       ),

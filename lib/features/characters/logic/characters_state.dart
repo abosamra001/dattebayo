@@ -14,4 +14,9 @@ class CharactersState with _$CharactersState {
     required List<CharacterModel> characters,
   }) = CharactersSuccess;
   factory CharactersState.charactersError(String error) = CharactersError;
+
+  // searching
+  factory CharactersState.charactersSearchSuccess({
+    required List<CharacterModel> characters,
+  }) = CharactersSearchSuccess;
 }
