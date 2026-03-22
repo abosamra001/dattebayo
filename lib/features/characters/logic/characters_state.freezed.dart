@@ -55,7 +55,7 @@ extension CharactersStatePatterns on CharactersState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( CharactersLoading value)?  charactersLoading,TResult Function( _CharactersLoadingMore value)?  charactersLoadingMore,TResult Function( CharactersSuccess value)?  charactersSuccess,TResult Function( CharactersError value)?  charactersError,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( CharactersLoading value)?  charactersLoading,TResult Function( _CharactersLoadingMore value)?  charactersLoadingMore,TResult Function( CharactersSuccess value)?  charactersSuccess,TResult Function( CharactersError value)?  charactersError,TResult Function( CharactersSearchSuccess value)?  charactersSearchSuccess,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
@@ -63,7 +63,8 @@ return initial(_that);case CharactersLoading() when charactersLoading != null:
 return charactersLoading(_that);case _CharactersLoadingMore() when charactersLoadingMore != null:
 return charactersLoadingMore(_that);case CharactersSuccess() when charactersSuccess != null:
 return charactersSuccess(_that);case CharactersError() when charactersError != null:
-return charactersError(_that);case _:
+return charactersError(_that);case CharactersSearchSuccess() when charactersSearchSuccess != null:
+return charactersSearchSuccess(_that);case _:
   return orElse();
 
 }
@@ -81,7 +82,7 @@ return charactersError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( CharactersLoading value)  charactersLoading,required TResult Function( _CharactersLoadingMore value)  charactersLoadingMore,required TResult Function( CharactersSuccess value)  charactersSuccess,required TResult Function( CharactersError value)  charactersError,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( CharactersLoading value)  charactersLoading,required TResult Function( _CharactersLoadingMore value)  charactersLoadingMore,required TResult Function( CharactersSuccess value)  charactersSuccess,required TResult Function( CharactersError value)  charactersError,required TResult Function( CharactersSearchSuccess value)  charactersSearchSuccess,}){
 final _that = this;
 switch (_that) {
 case _Initial():
@@ -89,7 +90,8 @@ return initial(_that);case CharactersLoading():
 return charactersLoading(_that);case _CharactersLoadingMore():
 return charactersLoadingMore(_that);case CharactersSuccess():
 return charactersSuccess(_that);case CharactersError():
-return charactersError(_that);case _:
+return charactersError(_that);case CharactersSearchSuccess():
+return charactersSearchSuccess(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -106,7 +108,7 @@ return charactersError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( CharactersLoading value)?  charactersLoading,TResult? Function( _CharactersLoadingMore value)?  charactersLoadingMore,TResult? Function( CharactersSuccess value)?  charactersSuccess,TResult? Function( CharactersError value)?  charactersError,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( CharactersLoading value)?  charactersLoading,TResult? Function( _CharactersLoadingMore value)?  charactersLoadingMore,TResult? Function( CharactersSuccess value)?  charactersSuccess,TResult? Function( CharactersError value)?  charactersError,TResult? Function( CharactersSearchSuccess value)?  charactersSearchSuccess,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
@@ -114,7 +116,8 @@ return initial(_that);case CharactersLoading() when charactersLoading != null:
 return charactersLoading(_that);case _CharactersLoadingMore() when charactersLoadingMore != null:
 return charactersLoadingMore(_that);case CharactersSuccess() when charactersSuccess != null:
 return charactersSuccess(_that);case CharactersError() when charactersError != null:
-return charactersError(_that);case _:
+return charactersError(_that);case CharactersSearchSuccess() when charactersSearchSuccess != null:
+return charactersSearchSuccess(_that);case _:
   return null;
 
 }
@@ -131,14 +134,15 @@ return charactersError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  charactersLoading,TResult Function( List<CharacterModel> characters)?  charactersLoadingMore,TResult Function( List<CharacterModel> characters)?  charactersSuccess,TResult Function( String error)?  charactersError,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  charactersLoading,TResult Function( List<CharacterModel> characters)?  charactersLoadingMore,TResult Function( List<CharacterModel> characters)?  charactersSuccess,TResult Function( String error)?  charactersError,TResult Function( List<CharacterModel> characters)?  charactersSearchSuccess,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case CharactersLoading() when charactersLoading != null:
 return charactersLoading();case _CharactersLoadingMore() when charactersLoadingMore != null:
 return charactersLoadingMore(_that.characters);case CharactersSuccess() when charactersSuccess != null:
 return charactersSuccess(_that.characters);case CharactersError() when charactersError != null:
-return charactersError(_that.error);case _:
+return charactersError(_that.error);case CharactersSearchSuccess() when charactersSearchSuccess != null:
+return charactersSearchSuccess(_that.characters);case _:
   return orElse();
 
 }
@@ -156,14 +160,15 @@ return charactersError(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  charactersLoading,required TResult Function( List<CharacterModel> characters)  charactersLoadingMore,required TResult Function( List<CharacterModel> characters)  charactersSuccess,required TResult Function( String error)  charactersError,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  charactersLoading,required TResult Function( List<CharacterModel> characters)  charactersLoadingMore,required TResult Function( List<CharacterModel> characters)  charactersSuccess,required TResult Function( String error)  charactersError,required TResult Function( List<CharacterModel> characters)  charactersSearchSuccess,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case CharactersLoading():
 return charactersLoading();case _CharactersLoadingMore():
 return charactersLoadingMore(_that.characters);case CharactersSuccess():
 return charactersSuccess(_that.characters);case CharactersError():
-return charactersError(_that.error);case _:
+return charactersError(_that.error);case CharactersSearchSuccess():
+return charactersSearchSuccess(_that.characters);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -180,14 +185,15 @@ return charactersError(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  charactersLoading,TResult? Function( List<CharacterModel> characters)?  charactersLoadingMore,TResult? Function( List<CharacterModel> characters)?  charactersSuccess,TResult? Function( String error)?  charactersError,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  charactersLoading,TResult? Function( List<CharacterModel> characters)?  charactersLoadingMore,TResult? Function( List<CharacterModel> characters)?  charactersSuccess,TResult? Function( String error)?  charactersError,TResult? Function( List<CharacterModel> characters)?  charactersSearchSuccess,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case CharactersLoading() when charactersLoading != null:
 return charactersLoading();case _CharactersLoadingMore() when charactersLoadingMore != null:
 return charactersLoadingMore(_that.characters);case CharactersSuccess() when charactersSuccess != null:
 return charactersSuccess(_that.characters);case CharactersError() when charactersError != null:
-return charactersError(_that.error);case _:
+return charactersError(_that.error);case CharactersSearchSuccess() when charactersSearchSuccess != null:
+return charactersSearchSuccess(_that.characters);case _:
   return null;
 
 }
@@ -463,6 +469,78 @@ class _$CharactersErrorCopyWithImpl<$Res>
   return _then(CharactersError(
 null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class CharactersSearchSuccess implements CharactersState {
+   CharactersSearchSuccess({required final  List<CharacterModel> characters}): _characters = characters;
+  
+
+ final  List<CharacterModel> _characters;
+ List<CharacterModel> get characters {
+  if (_characters is EqualUnmodifiableListView) return _characters;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_characters);
+}
+
+
+/// Create a copy of CharactersState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CharactersSearchSuccessCopyWith<CharactersSearchSuccess> get copyWith => _$CharactersSearchSuccessCopyWithImpl<CharactersSearchSuccess>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CharactersSearchSuccess&&const DeepCollectionEquality().equals(other._characters, _characters));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_characters));
+
+@override
+String toString() {
+  return 'CharactersState.charactersSearchSuccess(characters: $characters)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $CharactersSearchSuccessCopyWith<$Res> implements $CharactersStateCopyWith<$Res> {
+  factory $CharactersSearchSuccessCopyWith(CharactersSearchSuccess value, $Res Function(CharactersSearchSuccess) _then) = _$CharactersSearchSuccessCopyWithImpl;
+@useResult
+$Res call({
+ List<CharacterModel> characters
+});
+
+
+
+
+}
+/// @nodoc
+class _$CharactersSearchSuccessCopyWithImpl<$Res>
+    implements $CharactersSearchSuccessCopyWith<$Res> {
+  _$CharactersSearchSuccessCopyWithImpl(this._self, this._then);
+
+  final CharactersSearchSuccess _self;
+  final $Res Function(CharactersSearchSuccess) _then;
+
+/// Create a copy of CharactersState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? characters = null,}) {
+  return _then(CharactersSearchSuccess(
+characters: null == characters ? _self._characters : characters // ignore: cast_nullable_to_non_nullable
+as List<CharacterModel>,
   ));
 }
 

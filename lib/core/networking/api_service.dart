@@ -14,4 +14,11 @@ abstract class ApiService {
     @Query('limit') int? limit,
     @Query('page') int? page,
   });
+
+  @GET(ApiConstants.allCharacters)
+  Future<CharacterResponseModel> searchCharactersByName({
+    @Query('name') String? name,
+    @Query('limit') int? limit,
+    @Query('page') int? page,
+  });
 }

@@ -1,16 +1,16 @@
-import 'package:dattebayo/core/themes/app_text_styles.dart';
-import 'package:dattebayo/core/themes/colors.dart';
-import 'package:dattebayo/features/characters/data/models/character_response_model.dart';
-import 'package:dattebayo/features/characters/ui/widgets/characters_shimmer_loading.dart';
+import 'dart:async';
+
+import 'package:dattebayo/features/characters/logic/characters_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../core/widgets/uzumaki_loading_indicator.dart';
-import '../../logic/characters_cubit.dart';
-import '../../logic/characters_state.dart';
-import '../widgets/character_card.dart';
+import '../../../../core/helpers/spacer.dart';
+import '../../../../core/themes/app_text_styles.dart';
+import '../../../../core/themes/colors.dart';
+import '../../../../core/widgets/top_search_bar.dart';
+import '../widgets/characters_grid_view.dart';
 
 class AllCharactersScreen extends StatefulWidget {
   const AllCharactersScreen({super.key});
@@ -20,24 +20,13 @@ class AllCharactersScreen extends StatefulWidget {
 }
 
 class _AllCharactersScreenState extends State<AllCharactersScreen> {
-  final ScrollController _scrollController = ScrollController();
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController.addListener(() {
-      final position = _scrollController.position;
-      final isAtBottom = position.pixels >= position.maxScrollExtent - 200;
-
-      if (isAtBottom) {
-        context.read<CharactersCubit>().getAllCharacters();
-      }
-    });
-  }
+  final TextEditingController _searchController = TextEditingController();
+  Timer? _debounceTimer;
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    _searchController.dispose();
+    _debounceTimer?.cancel();
     super.dispose();
   }
 
@@ -54,68 +43,42 @@ class _AllCharactersScreenState extends State<AllCharactersScreen> {
         foregroundColor: ColorManager.mainColor,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.read<CharactersCubit>().filterByName();
+            },
             icon: const FaIcon(FontAwesomeIcons.arrowDownShortWide),
           ),
         ],
         actionsPadding: const EdgeInsets.only(right: 16),
+        scrolledUnderElevation: 0,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: BlocBuilder<CharactersCubit, CharactersState>(
-          builder: (context, state) {
-            return state.maybeWhen(
-              charactersLoading: () => _buildShimmerLoading(),
-              charactersLoadingMore: (characters) =>
-                  _buildCharacterList(characters, true),
-              charactersSuccess: (characters) =>
-                  _buildCharacterList(characters, false),
-              charactersError: (error) {
-                return Center(child: Text(error));
+        child: Column(
+          children: [
+            TopSearchBar(
+              onSubmitted: (query) {
+                _debounceTimer?.cancel();
+                context.read<CharactersCubit>().searchCharactersByName(
+                  name: query,
+                );
               },
-              orElse: () => const SizedBox.shrink(),
-            );
-          },
+              onChanged: onSearchingChanged,
+              controller: _searchController,
+              hintText: 'Search in narturo characters',
+            ),
+            verticalSpace(16),
+            const Expanded(child: CharactersGridView()),
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildCharacterList(
-    List<CharacterModel> characters,
-    bool isLoadingMore,
-  ) {
-    return GridView.builder(
-      key: const PageStorageKey('characters_grid'),
-      controller: _scrollController,
-      itemCount: characters.length + (isLoadingMore ? 1 : 0),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 16,
-        childAspectRatio: 170 / 270,
-      ),
-      itemBuilder: (context, index) {
-        if (index == characters.length) {
-          return const Center(child: UzumakiLoadingIndicator());
-        }
-        return CharacterCard(character: characters[index]);
-      },
-    );
-  }
-
-  Widget _buildShimmerLoading() {
-    return GridView.builder(
-      itemCount: 6,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 16,
-        childAspectRatio: 170 / 270,
-      ),
-      itemBuilder: (context, index) {
-        return const CharactersShimmerLoading();
-      },
-    );
+  void onSearchingChanged(String? query) {
+    _debounceTimer?.cancel();
+    _debounceTimer = Timer(const Duration(milliseconds: 750), () {
+      context.read<CharactersCubit>().searchCharactersByName(name: query);
+    });
   }
 }

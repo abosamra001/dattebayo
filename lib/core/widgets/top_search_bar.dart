@@ -8,11 +8,13 @@ class TopSearchBar extends StatelessWidget {
   final ValueChanged<String?> onSubmitted;
   final ValueChanged<String?> onChanged;
   final TextEditingController controller;
+  final String? hintText;
   const TopSearchBar({
     super.key,
     required this.onSubmitted,
     required this.onChanged,
     required this.controller,
+    this.hintText,
   });
 
   @override
@@ -32,7 +34,7 @@ class TopSearchBar extends StatelessWidget {
         ColorManager.lightBrown.withValues(alpha: 0.5),
       ),
 
-      hintText: 'Search Jutsu, Shinobi, or  Clans...',
+      hintText: hintText ?? 'Search Jutsu, Shinobi, or  Clans...',
       hintStyle: WidgetStatePropertyAll(AppTextStyles.font14BlueGrayReqular),
       padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 16.w)),
       shape: WidgetStatePropertyAll(

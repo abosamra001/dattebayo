@@ -19,4 +19,21 @@ class CharactersRepo {
       return ApiResult.failure(ApiErrorHandler.handle(error));
     }
   }
+
+  Future<ApiResult<CharacterResponseModel>> searchCharactersByName({
+    String? name,
+    int? limit,
+    int? page,
+  }) async {
+    try {
+      final res = await apiService.searchCharactersByName(
+        name: name,
+        limit: limit,
+        page: page,
+      );
+      return ApiResult.success(res);
+    } catch (e) {
+      return ApiResult.failure(ApiErrorHandler.handle(e));
+    }
+  }
 }
