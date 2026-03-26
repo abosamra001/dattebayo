@@ -1,3 +1,4 @@
+import 'package:dattebayo/core/helpers/app_dialogs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,7 +46,14 @@ class _CharactersGridViewState extends State<CharactersGridView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CharactersCubit, CharactersState>(
+    return BlocConsumer<CharactersCubit, CharactersState>(
+      listener: (context, state) {
+        state.maybeWhen(
+          charactersError: (error) =>
+              AppDialogs.showErrorDialog(context, error),
+          orElse: () {},
+        );
+      },
       builder: (context, state) {
         return state.maybeWhen(
           charactersLoading: () => _buildShimmerLoading(),
@@ -55,9 +63,8 @@ class _CharactersGridViewState extends State<CharactersGridView> {
               _buildCharacterList(characters: characters),
           charactersSearchSuccess: (characters) =>
               _buildCharacterList(characters: characters),
-          charactersError: (error) {
-            return Center(child: Text(error));
-          },
+          charactersError: (error) =>
+              Center(child: Image.asset('assets/images/png/error_3.png')),
           orElse: () => const SizedBox.shrink(),
         );
       },

@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dattebayo/core/helpers/extensions.dart';
 import 'package:dattebayo/core/helpers/spacer.dart';
+import 'package:dattebayo/core/routing/routes.dart';
 import 'package:dattebayo/core/themes/app_text_styles.dart';
 import 'package:dattebayo/core/themes/colors.dart';
 import 'package:dattebayo/core/widgets/uzumaki_loading_indicator.dart';
@@ -27,7 +29,9 @@ class _CharacterItemState extends State<CharacterItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        context.pushNamed(Routes.characterDetailsScreen);
+      },
       onTapDown: (_) => _handleTap(true),
       onTapUp: (_) => _handleTap(false),
       onTapCancel: () => _handleTap(false),
