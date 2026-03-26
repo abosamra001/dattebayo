@@ -24,7 +24,7 @@ class ApiErrorHandler {
       case DioExceptionType.cancel:
         return 'The Request was canceled!';
       case DioExceptionType.connectionError:
-        return 'Failed while connecting with the server!';
+        return 'Failed while connecting with the server! Check your internet';
       case DioExceptionType.unknown:
         return 'Unknown error occurred!';
     }

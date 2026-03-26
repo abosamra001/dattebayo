@@ -1,3 +1,4 @@
+import 'package:dattebayo/features/characters/ui/screens/character_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,6 +30,10 @@ class AppRouter {
             create: (context) => getIt<CharactersCubit>()..getAllCharacters(),
             child: const AllCharactersScreen(),
           ),
+        );
+      case Routes.characterDetailsScreen:
+        return MaterialPageRoute(
+          builder: (context) => const CharacterDetailsScreen(),
         );
       default:
         return null;

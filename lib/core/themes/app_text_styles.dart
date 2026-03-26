@@ -37,8 +37,23 @@ class AppTextStyles {
     color: Colors.white,
     fontWeight: FontWeightHelper.bold,
   );
+  static final font36WhiteExtraBold = TextStyle(
+    fontSize: 36.sp,
+    color: Colors.white,
+    fontWeight: FontWeightHelper.extraBold,
+  );
 
   // white brown
+  static final font14WhiteBrownBold = TextStyle(
+    fontSize: 14.sp,
+    color: ColorManager.mainFontColor,
+    fontWeight: FontWeightHelper.bold,
+  );
+  static final font16WhiteBrownMedium = TextStyle(
+    fontSize: 16.sp,
+    color: ColorManager.mainFontColor,
+    fontWeight: FontWeightHelper.medium,
+  );
   static final font18WhiteBrownRegular = TextStyle(
     fontSize: 18.sp,
     color: ColorManager.mainFontColor,
@@ -68,9 +83,14 @@ class AppTextStyles {
   );
 
   // blue gray
+  static final font12BlueGrayBold = TextStyle(
+    fontSize: 12.sp,
+    color: ColorManager.blueGray,
+    fontWeight: FontWeightHelper.bold,
+  );
   static final font14BlueGrayReqular = TextStyle(
     fontSize: 14.sp,
-    color: ColorManager.mainFontColor,
+    color: ColorManager.blueGray,
     fontWeight: FontWeightHelper.regular,
   );
 }

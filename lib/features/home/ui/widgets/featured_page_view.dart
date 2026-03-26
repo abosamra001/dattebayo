@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/helpers/app_dialogs.dart';
 import '../../../characters/logic/characters_cubit.dart';
 import '../../../characters/logic/characters_state.dart';
 import 'character_item.dart';
@@ -11,7 +12,14 @@ class FeaturedPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CharactersCubit, CharactersState>(
+    return BlocConsumer<CharactersCubit, CharactersState>(
+      listener: (context, state) {
+        state.maybeWhen(
+          charactersError: (error) =>
+              AppDialogs.showErrorDialog(context, error),
+          orElse: () {},
+        );
+      },
       builder: (context, state) {
         return state.maybeWhen(
           charactersLoading: () => PageView.builder(
@@ -25,9 +33,8 @@ class FeaturedPageView extends StatelessWidget {
             itemBuilder: (context, i) =>
                 CharacterItem(characterModel: characters[i]),
           ),
-          charactersError: (error) {
-            return Center(child: Text(error));
-          },
+          charactersError: (error) =>
+              Center(child: Image.asset('assets/images/png/error_3.png')),
           orElse: () => const SizedBox.shrink(),
         );
       },

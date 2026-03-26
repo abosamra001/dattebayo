@@ -14,6 +14,7 @@ class DattebayoApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
+      ensureScreenSize: true,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: Routes.onboarding,
