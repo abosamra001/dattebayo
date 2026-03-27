@@ -44,6 +44,11 @@ class AppTextStyles {
   );
 
   // white brown
+  static final font12WhiteBrownReqular = TextStyle(
+    fontSize: 12.sp,
+    color: ColorManager.mainFontColor,
+    fontWeight: FontWeightHelper.regular,
+  );
   static final font14WhiteBrownBold = TextStyle(
     fontSize: 14.sp,
     color: ColorManager.mainFontColor,

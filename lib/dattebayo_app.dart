@@ -1,9 +1,13 @@
-import 'package:dattebayo/core/routing/app_router.dart';
-import 'package:dattebayo/core/routing/routes.dart';
-import 'package:dattebayo/core/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../core/routing/app_router.dart';
+import '../core/networking/cubit/network_cubit.dart';
+import '../core/routing/routes.dart';
+import '../core/widgets/network_wrapper.dart';
+import '../core/themes/colors.dart';
 
 class DattebayoApp extends StatelessWidget {
   final AppRouter appRouter;
@@ -15,24 +19,28 @@ class DattebayoApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       ensureScreenSize: true,
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: Routes.onboarding,
-        onGenerateRoute: appRouter.onGenerateRoute,
-        theme: ThemeData(
-          brightness: .dark,
-          appBarTheme: const AppBarTheme(
-            backgroundColor: ColorManager.backgroundColor,
-            systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: Colors.transparent,
+      child: BlocProvider<NetworkCubit>(
+        create: (context) => NetworkCubit(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          initialRoute: Routes.onboarding,
+          onGenerateRoute: appRouter.onGenerateRoute,
+          builder: (context, child) => NetworkWrapper(child: child!),
+          theme: ThemeData(
+            brightness: .dark,
+            appBarTheme: const AppBarTheme(
+              backgroundColor: ColorManager.backgroundColor,
+              systemOverlayStyle: SystemUiOverlayStyle(
+                statusBarColor: Colors.transparent,
+              ),
             ),
-          ),
-          scaffoldBackgroundColor: ColorManager.backgroundColor,
-          pageTransitionsTheme: const PageTransitionsTheme(
-            builders: {
-              TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
-              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-            },
+            scaffoldBackgroundColor: ColorManager.backgroundColor,
+            pageTransitionsTheme: const PageTransitionsTheme(
+              builders: {
+                TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+                TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+              },
+            ),
           ),
         ),
       ),

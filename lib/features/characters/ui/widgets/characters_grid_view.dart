@@ -1,7 +1,9 @@
-import 'package:dattebayo/core/helpers/app_dialogs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/helpers/app_dialogs.dart';
+import '../../../../core/helpers/extensions.dart';
+import '../../../../core/widgets/global_error_widget.dart';
 import '../../../../core/widgets/uzumaki_loading_indicator.dart';
 import '../../data/models/character_response_model.dart';
 import '../../logic/characters_cubit.dart';
@@ -63,8 +65,12 @@ class _CharactersGridViewState extends State<CharactersGridView> {
               _buildCharacterList(characters: characters),
           charactersSearchSuccess: (characters) =>
               _buildCharacterList(characters: characters),
-          charactersError: (error) =>
-              Center(child: Image.asset('assets/images/png/error_3.png')),
+          charactersError: (error) {
+            final characters = context.read<CharactersCubit>().characters;
+            return characters.isNullOrEmpty
+                ? GlobalErrorWidget(error: error)
+                : _buildCharacterList(characters: characters);
+          },
           orElse: () => const SizedBox.shrink(),
         );
       },
