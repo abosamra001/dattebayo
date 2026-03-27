@@ -1,3 +1,4 @@
+import 'package:dattebayo/features/characters/data/models/character_response_model.dart';
 import 'package:dattebayo/features/characters/ui/screens/character_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +34,10 @@ class AppRouter {
         );
       case Routes.characterDetailsScreen:
         return MaterialPageRoute(
-          builder: (context) => const CharacterDetailsScreen(),
+          builder: (context) {
+            final character = settings.arguments as CharacterModel;
+            return CharacterDetailsScreen(character: character);
+          },
         );
       default:
         return null;

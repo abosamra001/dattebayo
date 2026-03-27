@@ -53,6 +53,7 @@ CharacterPersonalDetails _$CharacterPersonalDetailsFromJson(
 ) => CharacterPersonalDetails(
   birthdate: json['birthdate'] as String?,
   sex: json['sex'] as String?,
+  bloodType: json['bloodType'] as String?,
   clan: const StringOrListConverter().fromJson(json['clan']),
   kekkeiMora: const StringOrListConverter().fromJson(json['kekkeiMōra']),
   kekkeiGenkai: const StringOrListConverter().fromJson(json['kekkeiGenkai']),
@@ -77,6 +78,7 @@ Map<String, dynamic> _$CharacterPersonalDetailsToJson(
 ) => <String, dynamic>{
   'birthdate': instance.birthdate,
   'sex': instance.sex,
+  'bloodType': instance.bloodType,
   'kekkeiMōra': const StringOrListConverter().toJson(instance.kekkeiMora),
   'kekkeiGenkai': const StringOrListConverter().toJson(instance.kekkeiGenkai),
   'occupation': const StringOrListConverter().toJson(instance.occupation),
