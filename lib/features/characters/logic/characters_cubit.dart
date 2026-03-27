@@ -1,4 +1,5 @@
 import 'package:dattebayo/core/helpers/extensions.dart';
+import 'package:dattebayo/core/helpers/logger.dart';
 import 'package:dattebayo/core/networking/api_result.dart';
 import 'package:dattebayo/features/characters/data/models/character_response_model.dart';
 import 'package:dattebayo/features/characters/data/repos/characters_repo.dart';
@@ -9,7 +10,7 @@ class CharactersCubit extends Cubit<CharactersState> {
   final CharactersRepo repo;
   CharactersCubit({required this.repo}) : super(CharactersState.initial());
 
-  final List<CharacterModel> _characters = [];
+  final List<CharacterModel> characters = [];
   int _currentPage = 1;
   bool _hasMore = true;
   bool _isFetching = false;
@@ -26,15 +27,16 @@ class CharactersCubit extends Cubit<CharactersState> {
     if (_currentPage == 1) {
       emit(CharactersState.charactersLoading());
     } else {
-      emit(CharactersState.charactersLoadingMore(characters: _characters));
+      emit(CharactersState.charactersLoadingMore(characters: characters));
     }
     final res = await repo.getAllCharacters(limit: limit, page: _currentPage);
     res.when(
       success: (model) {
         _currentPage++;
         _hasMore = model.characters.length == limit;
-        _characters.addAll(model.characters);
-        emit(CharactersState.charactersSuccess(characters: _characters));
+        characters.addAll(model.characters);
+        Logger.printG('characters lenght is : ${characters.length}');
+        emit(CharactersState.charactersSuccess(characters: characters));
       },
       failure: (error) => emit(CharactersState.charactersError(error)),
     );
@@ -42,7 +44,7 @@ class CharactersCubit extends Cubit<CharactersState> {
   }
 
   void filterByName() async {
-    final copy = List.from(_characters).cast<CharacterModel>();
+    final copy = List.from(characters).cast<CharacterModel>();
     copy.sort((a, b) => a.name!.compareTo(b.name!));
     emit(CharactersState.charactersSuccess(characters: copy));
   }
@@ -54,7 +56,7 @@ class CharactersCubit extends Cubit<CharactersState> {
     }
     // extension for checking if string is null or empty (after beening trimed)
     if (_lastQuery.isNullOrEmpty) {
-      emit(CharactersState.charactersSuccess(characters: _characters));
+      emit(CharactersState.charactersSuccess(characters: characters));
       return;
     }
     if (!_hasMoreSearch || _isSearching) return;

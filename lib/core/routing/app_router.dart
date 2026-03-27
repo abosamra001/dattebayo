@@ -1,5 +1,3 @@
-import 'package:dattebayo/features/characters/data/models/character_response_model.dart';
-import 'package:dattebayo/features/characters/ui/screens/character_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,6 +6,8 @@ import '../../features/characters/ui/screens/all_characters_screen.dart';
 import '../../features/home/ui/home_screen.dart';
 import '../../features/onboarding/ui/onboarding_screen.dart';
 import '../di/dependency_injection.dart';
+import '/features/characters/ui/screens/character_details_screen.dart';
+import '/features/characters/data/models/character_response_model.dart';
 import 'routes.dart';
 
 class AppRouter {

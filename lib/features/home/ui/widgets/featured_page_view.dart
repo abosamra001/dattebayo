@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/helpers/app_dialogs.dart';
+import '../../../../core/widgets/global_error_widget.dart';
 import '../../../characters/logic/characters_cubit.dart';
 import '../../../characters/logic/characters_state.dart';
 import 'character_item.dart';
@@ -29,12 +30,11 @@ class FeaturedPageView extends StatelessWidget {
           ),
           charactersSuccess: (characters) => PageView.builder(
             controller: PageController(viewportFraction: 0.84),
-            itemCount: characters.length,
+            itemCount: characters.take(5).length,
             itemBuilder: (context, i) =>
                 CharacterItem(characterModel: characters[i]),
           ),
-          charactersError: (error) =>
-              Center(child: Image.asset('assets/images/png/error_3.png')),
+          charactersError: (error) => GlobalErrorWidget(error: error),
           orElse: () => const SizedBox.shrink(),
         );
       },
