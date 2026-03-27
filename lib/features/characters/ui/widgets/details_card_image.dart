@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../core/helpers/spacer.dart';
 import '../../../../core/themes/app_text_styles.dart';
@@ -9,7 +8,15 @@ import '../../../../core/themes/colors.dart';
 import '../../../../core/widgets/uzumaki_loading_indicator.dart';
 
 class DetailsCardImage extends StatelessWidget {
-  const DetailsCardImage({super.key});
+  final String image;
+  final String occupation;
+  final String name;
+  const DetailsCardImage({
+    super.key,
+    required this.image,
+    required this.occupation,
+    required this.name,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +26,6 @@ class DetailsCardImage extends StatelessWidget {
         Container(
           width: double.infinity,
           height: 487.h,
-          // padding: EdgeInsets.only(top: kToolbarHeight - 25),
           foregroundDecoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [ColorManager.backgroundColor, Colors.transparent],
@@ -29,8 +35,7 @@ class DetailsCardImage extends StatelessWidget {
             ),
           ),
           child: CachedNetworkImage(
-            imageUrl:
-                'https://static.wikia.nocookie.net/naruto/images/d/d6/Naruto_Part_I.png',
+            imageUrl: image,
             fit: .cover,
             placeholder: (context, url) =>
                 const Center(child: UzumakiLoadingIndicator()),
@@ -38,7 +43,7 @@ class DetailsCardImage extends StatelessWidget {
               return Column(
                 mainAxisAlignment: .center,
                 children: [
-                  const FaIcon(FontAwesomeIcons.exclamation, size: 36),
+                  Image.asset('assets/images/png/error_2.png'),
                   verticalSpace(16),
                   Text(
                     'No Photo Found',
@@ -56,13 +61,13 @@ class DetailsCardImage extends StatelessWidget {
             mainAxisSize: .min,
             children: [
               Text(
-                'SEVENTH HOKAGE'.toUpperCase(),
+                occupation.toUpperCase(),
                 style: AppTextStyles.font14MainOrangeSemiBold,
                 overflow: .ellipsis,
               ),
               verticalSpace(2),
               Text(
-                'Naruto  Uzumaki',
+                name,
                 style: AppTextStyles.font36WhiteExtraBold.copyWith(
                   fontFamily: 'Ninja',
                 ),

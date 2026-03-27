@@ -17,3 +17,7 @@ extension StringExtension on String? {
 extension ListExtension on List? {
   bool get isNullOrEmpty => this == null || this!.isEmpty;
 }
+
+extension MapExtension on Map? {
+  bool get isNullOrEmpty => this == null || this!.isEmpty;
+}

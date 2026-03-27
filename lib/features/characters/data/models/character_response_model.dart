@@ -48,6 +48,7 @@ class CharacterModel {
 class CharacterPersonalDetails {
   final String? birthdate;
   final String? sex;
+  final String? bloodType;
   @JsonKey(name: 'kekkeiMōra')
   @StringOrListConverter()
   final List<String>? kekkeiMora;
@@ -72,6 +73,7 @@ class CharacterPersonalDetails {
   CharacterPersonalDetails({
     required this.birthdate,
     required this.sex,
+    this.bloodType,
     required this.clan,
     required this.kekkeiMora,
     required this.kekkeiGenkai,

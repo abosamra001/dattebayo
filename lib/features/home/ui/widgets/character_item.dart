@@ -1,14 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dattebayo/core/helpers/extensions.dart';
-import 'package:dattebayo/core/helpers/spacer.dart';
-import 'package:dattebayo/core/routing/routes.dart';
-import 'package:dattebayo/core/themes/app_text_styles.dart';
-import 'package:dattebayo/core/themes/colors.dart';
-import 'package:dattebayo/core/widgets/uzumaki_loading_indicator.dart';
-import 'package:dattebayo/features/characters/data/models/character_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../../../../core/helpers/spacer.dart';
+import '../../../../core/routing/routes.dart';
+import '../../../../core/themes/app_text_styles.dart';
+import '../../../../core/themes/colors.dart';
+import '../../../../core/widgets/uzumaki_loading_indicator.dart';
+import '../../../../core/helpers/extensions.dart';
+import '../../../characters/data/models/character_response_model.dart';
 
 class CharacterItem extends StatefulWidget {
   final CharacterModel characterModel;
@@ -30,7 +31,10 @@ class _CharacterItemState extends State<CharacterItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.pushNamed(Routes.characterDetailsScreen);
+        context.pushNamed(
+          Routes.characterDetailsScreen,
+          arguments: widget.characterModel,
+        );
       },
       onTapDown: (_) => _handleTap(true),
       onTapUp: (_) => _handleTap(false),
@@ -41,7 +45,6 @@ class _CharacterItemState extends State<CharacterItem> {
           Container(
             width: 280.w,
             height: 378.h,
-            // padding: const EdgeInsets.all(2),
             decoration: BoxDecoration(
               border: Border.all(color: ColorManager.mainColor, width: 1),
               borderRadius: BorderRadius.circular(12.r),
