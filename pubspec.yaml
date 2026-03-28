@@ -48,13 +48,14 @@ dependencies:
   pretty_dio_logger: ^1.4.0
   retrofit: ^4.9.2
   retrofit_generator: ^10.2.3
+  shared_preferences: ^2.5.5
   shimmer: ^3.0.0
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.14.4
   flutter_lints: ^6.0.0
   # Add the dependency for the "flutter_native_splash" package, which provides a way to create native splash screens for Flutter applications.
   flutter_native_splash: ^2.4.7
-  flutter_launcher_icons: ^0.14.4
   flutter_test:
     sdk: flutter
 

@@ -11,7 +11,12 @@ import '../core/themes/colors.dart';
 
 class DattebayoApp extends StatelessWidget {
   final AppRouter appRouter;
-  const DattebayoApp({super.key, required this.appRouter});
+  final bool isFirstTime;
+  const DattebayoApp({
+    super.key,
+    required this.appRouter,
+    required this.isFirstTime,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,7 @@ class DattebayoApp extends StatelessWidget {
         create: (context) => NetworkCubit(),
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: Routes.onboarding,
+          initialRoute: isFirstTime ? Routes.onboarding : Routes.home,
           onGenerateRoute: appRouter.onGenerateRoute,
           builder: (context, child) => NetworkWrapper(child: child!),
           theme: ThemeData(
