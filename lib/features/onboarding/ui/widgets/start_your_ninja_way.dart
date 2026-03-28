@@ -1,3 +1,5 @@
+import 'package:dattebayo/core/helpers/constants.dart';
+import 'package:dattebayo/core/helpers/prefs_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,6 +15,7 @@ class StartYourNinjaWay extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        PrefsService.setBool(Constants.isFirstTime, false);
         context.pushReplacementNamed(Routes.home);
       },
       child: Container(
