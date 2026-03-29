@@ -1,10 +1,10 @@
-import 'package:dattebayo/core/helpers/extensions.dart';
-import 'package:dattebayo/core/helpers/logger.dart';
-import 'package:dattebayo/core/networking/api_result.dart';
-import 'package:dattebayo/features/characters/data/models/character_response_model.dart';
-import 'package:dattebayo/features/characters/data/repos/characters_repo.dart';
-import 'package:dattebayo/features/characters/logic/characters_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../core/helpers/extensions.dart';
+import '../../../core/networking/api_result.dart';
+import '../data/models/character_response_model.dart';
+import '../data/repos/characters_repo.dart';
+import 'characters_state.dart';
 
 class CharactersCubit extends Cubit<CharactersState> {
   final CharactersRepo repo;
@@ -35,7 +35,6 @@ class CharactersCubit extends Cubit<CharactersState> {
         _currentPage++;
         _hasMore = model.characters.length == limit;
         characters.addAll(model.characters);
-        Logger.printG('characters lenght is : ${characters.length}');
         emit(CharactersState.charactersSuccess(characters: characters));
       },
       failure: (error) => emit(CharactersState.charactersError(error)),

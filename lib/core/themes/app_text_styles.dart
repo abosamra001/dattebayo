@@ -18,6 +18,11 @@ class AppTextStyles {
   static final font20MainOrangeBold = TextStyle(
     fontSize: 20.sp,
     color: ColorManager.mainColor,
+    fontWeight: FontWeightHelper.extraBold,
+  );
+  static final font40MainOrangeExtraBold = TextStyle(
+    fontSize: 40.sp,
+    color: ColorManager.mainColor,
     fontWeight: FontWeightHelper.bold,
   );
 
@@ -88,6 +93,11 @@ class AppTextStyles {
   );
 
   // blue gray
+  static final font10BlueGrayBold = TextStyle(
+    fontSize: 10.sp,
+    color: ColorManager.blueGray,
+    fontWeight: FontWeightHelper.regular,
+  );
   static final font12BlueGrayBold = TextStyle(
     fontSize: 12.sp,
     color: ColorManager.blueGray,

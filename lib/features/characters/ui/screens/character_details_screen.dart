@@ -245,8 +245,6 @@ class CharacterDetailsScreen extends StatelessWidget {
       (_) => ' ',
     );
 
-    return spaced.isNullOrEmpty
-        ? spaced
-        : spaced[0].toUpperCase() + spaced.substring(1);
+    return spaced.capitalizeFirst()!;
   }
 }

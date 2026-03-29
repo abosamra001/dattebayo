@@ -1,5 +1,6 @@
 import 'package:dattebayo/core/networking/api_constants.dart';
 import 'package:dattebayo/features/characters/data/models/character_response_model.dart';
+import 'package:dattebayo/features/explore/data/models/simple_category_model.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -18,6 +19,31 @@ abstract class ApiService {
   @GET(ApiConstants.allCharacters)
   Future<CharacterResponseModel> searchCharactersByName({
     @Query('name') String? name,
+    @Query('limit') int? limit,
+    @Query('page') int? page,
+  });
+
+  // simple category
+  @GET(ApiConstants.allClans)
+  Future<SimpleCategoryModelResponse> getAllClans({
+    @Query('limit') int? limit,
+    @Query('page') int? page,
+  });
+
+  @GET(ApiConstants.allVillages)
+  Future<SimpleCategoryModelResponse> getAllVillages({
+    @Query('limit') int? limit,
+    @Query('page') int? page,
+  });
+
+  @GET(ApiConstants.allTeams)
+  Future<SimpleCategoryModelResponse> getAllTeams({
+    @Query('limit') int? limit,
+    @Query('page') int? page,
+  });
+
+  @GET(ApiConstants.allKekkeiGenkai)
+  Future<SimpleCategoryModelResponse> getAllKekkeiGenkai({
     @Query('limit') int? limit,
     @Query('page') int? page,
   });
