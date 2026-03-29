@@ -12,6 +12,10 @@ extension NavigationExtension on BuildContext {
 
 extension StringExtension on String? {
   bool get isNullOrEmpty => this == null || (this!.trim()).isEmpty;
+  String? capitalizeFirst() {
+    if (isNullOrEmpty) return this;
+    return this![0].toUpperCase() + this!.substring(1);
+  }
 }
 
 extension ListExtension on List? {
