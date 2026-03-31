@@ -1,3 +1,4 @@
+import '../../../../core/helpers/constants.dart';
 import '../../../../core/networking/api_error_handler.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/api_service.dart';
@@ -17,6 +18,32 @@ class CharactersRepo {
   Future<ApiResult<List<CharacterModel>>> getCharacterById({
     required String ids,
   }) => _serviceCall(() => apiService.getCharactersById(charactersIds: ids));
+
+  Future<ApiResult<CharacterResponseModel>> getDetailedCategory({
+    required DetailedCategoryType type,
+    int? limit,
+    int? page,
+  }) async {
+    try {
+      final res = await switch (type) {
+        DetailedCategoryType.akatsuki => apiService.getakAtsuki(
+          limit: limit,
+          page: page,
+        ),
+        DetailedCategoryType.tailedBeasts => apiService.getTailedBeasts(
+          limit: limit,
+          page: page,
+        ),
+        DetailedCategoryType.kara => apiService.getKara(
+          limit: limit,
+          page: page,
+        ),
+      };
+      return ApiResult.success(res);
+    } catch (error) {
+      return ApiResult.failure(ApiErrorHandler.handle(error));
+    }
+  }
 
   Future<ApiResult<CharacterResponseModel>> searchCharactersByName({
     String? name,

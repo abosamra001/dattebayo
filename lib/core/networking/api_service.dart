@@ -52,4 +52,22 @@ abstract class ApiService {
     @Query('limit') int? limit,
     @Query('page') int? page,
   });
+
+  @GET(ApiConstants.akatsuki)
+  Future<CharacterResponseModel> getakAtsuki({
+    @Query('limit') int? limit,
+    @Query('page') int? page,
+  });
+
+  @GET(ApiConstants.tailedBeasts)
+  Future<CharacterResponseModel> getTailedBeasts({
+    @Query('limit') int? limit,
+    @Query('page') int? page,
+  });
+
+  @GET(ApiConstants.kara)
+  Future<CharacterResponseModel> getKara({
+    @Query('limit') int? limit,
+    @Query('page') int? page,
+  });
 }

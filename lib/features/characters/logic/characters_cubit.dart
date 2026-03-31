@@ -1,3 +1,4 @@
+import 'package:dattebayo/core/helpers/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/helpers/extensions.dart';
@@ -21,6 +22,9 @@ class CharactersCubit extends Cubit<CharactersState> {
   bool _isSearching = false;
   String? _lastQuery;
 
+  int _index = 0;
+  List<int> _cachedIds = [];
+
   void getAllCharacters({int? limit = 20}) async {
     if (!_hasMore || _isFetching) return;
     _isFetching = true;
@@ -42,8 +46,20 @@ class CharactersCubit extends Cubit<CharactersState> {
     _isFetching = false;
   }
 
-  int _index = 0;
-  List<int> _cachedIds = [];
+  void getDetailedCategory({
+    required DetailedCategoryType type,
+    int? limit,
+    int? page,
+  }) async {
+    emit(CharactersState.charactersLoading());
+    final res = await repo.getDetailedCategory(type: type, page: 1, limit: 50);
+    res.when(
+      success: (model) =>
+          emit(CharactersState.charactersSuccess(characters: model.characters)),
+      failure: (error) => emit(CharactersState.charactersError(error)),
+    );
+  }
+
   void getCharactersById({List<int>? ids, int length = 20}) async {
     if (ids != null) {
       _cachedIds = ids;
@@ -81,7 +97,7 @@ class CharactersCubit extends Cubit<CharactersState> {
     return '${chunk.join(',')},';
   }
 
-  Future<void> searchCharactersByName({String? name, int? limit = 20}) async {
+  void searchCharactersByName({String? name, int? limit = 20}) async {
     if (name != null) {
       _lastQuery = name;
       clearSearchList();

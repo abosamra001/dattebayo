@@ -1,4 +1,5 @@
 import 'package:dattebayo/core/helpers/constants.dart';
+import 'package:dattebayo/features/characters/ui/screens/detailed_characters_screen.dart';
 import 'package:dattebayo/features/characters/ui/screens/simple_character_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,7 +44,17 @@ class AppRouter {
             final args = settings.arguments as SimpleCategoryModel;
             return BlocProvider<CharactersCubit>(
               create: (context) => getIt<CharactersCubit>(),
-              child: SimpleCharactersScreen(simpleCateforyModel: args),
+              child: SimpleCharactersScreen(simpleCategoryModel: args),
+            );
+          },
+        );
+      case Routes.detailedCharacterScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            final args = settings.arguments as DetailedCategoryType;
+            return BlocProvider<CharactersCubit>(
+              create: (context) => getIt<CharactersCubit>(),
+              child: DetailedCharactersScreen(type: args),
             );
           },
         );
