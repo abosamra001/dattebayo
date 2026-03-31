@@ -4,3 +4,5 @@ class Constants {
 }
 
 enum SimpleCategoryType { clans, villages, kekkeiGenkai, teams }
+
+enum DetailedCategoryType { akatsuki, tailedBeasts, kara }

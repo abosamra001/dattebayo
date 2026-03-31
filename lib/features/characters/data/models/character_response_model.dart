@@ -5,8 +5,17 @@ import '../../../../core/helpers/string_or_list_converter.dart';
 
 part 'character_response_model.g.dart';
 
+Object? _getCharacters(Map json, _) {
+  return json['characters'] ??
+      json['tailed-beasts'] ??
+      json['akatsuki'] ??
+      json['kara'] ??
+      [];
+}
+
 @JsonSerializable()
 class CharacterResponseModel {
+  @JsonKey(readValue: _getCharacters)
   final List<CharacterModel> characters;
   final int currentPage;
   final int pageSize;

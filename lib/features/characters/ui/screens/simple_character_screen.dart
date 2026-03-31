@@ -9,8 +9,8 @@ import '../../../explore/data/models/simple_category_model.dart';
 import '../../logic/characters_cubit.dart';
 
 class SimpleCharactersScreen extends StatefulWidget {
-  final SimpleCategoryModel simpleCateforyModel;
-  const SimpleCharactersScreen({super.key, required this.simpleCateforyModel});
+  final SimpleCategoryModel simpleCategoryModel;
+  const SimpleCharactersScreen({super.key, required this.simpleCategoryModel});
 
   @override
   State<SimpleCharactersScreen> createState() => _SimpleCharactersScreenState();
@@ -25,7 +25,7 @@ class _SimpleCharactersScreenState extends State<SimpleCharactersScreen> {
   }
 
   void _fetchData() => context.read<CharactersCubit>().getCharactersById(
-    ids: widget.simpleCateforyModel.characters,
+    ids: widget.simpleCategoryModel.characters,
   );
   @override
   Widget build(BuildContext context) {
@@ -34,14 +34,14 @@ class _SimpleCharactersScreenState extends State<SimpleCharactersScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            '${widget.simpleCateforyModel.name}\'s Members',
+            '${widget.simpleCategoryModel.name}\'s Members',
             style: AppTextStyles.font14MainOrangeSemiBold,
           ),
         ),
-        body: widget.simpleCateforyModel.characters.isNullOrEmpty
+        body: widget.simpleCategoryModel.characters.isNullOrEmpty
             ? Center(
                 child: Text(
-                  'No members found in ${widget.simpleCateforyModel.name}',
+                  'No members found in ${widget.simpleCategoryModel.name}',
                   style: AppTextStyles.font16WhiteBrownMedium,
                 ),
               )

@@ -58,7 +58,12 @@ class ExploreMoreCards extends StatelessWidget {
             ),
             const Spacer(),
             ExploreMoreItem(
-              onTap: () {},
+              onTap: () {
+                context.pushNamed(
+                  Routes.detailedCharacterScreen,
+                  arguments: DetailedCategoryType.akatsuki,
+                );
+              },
               icon: FontAwesomeIcons.solidCloud,
               label: 'Akatsuki',
             ),
@@ -79,11 +84,28 @@ class ExploreMoreCards extends StatelessWidget {
             ),
             const Spacer(),
             ExploreMoreItem(
-              onTap: () {},
+              onTap: () {
+                context.pushNamed(
+                  Routes.detailedCharacterScreen,
+                  arguments: DetailedCategoryType.tailedBeasts,
+                );
+              },
               icon: FontAwesomeIcons.optinMonster,
               label: 'tailed-beasts',
             ),
           ],
+        ),
+        verticalSpace(16),
+        ExploreMoreItem(
+          onTap: () {
+            context.pushNamed(
+              Routes.detailedCharacterScreen,
+              arguments: DetailedCategoryType.kara,
+            );
+          },
+          label: 'Kara',
+          icon: FontAwesomeIcons.fireFlameCurved,
+          useFullWidth: true,
         ),
       ],
     );

@@ -9,7 +9,7 @@ part of 'character_response_model.dart';
 CharacterResponseModel _$CharacterResponseModelFromJson(
   Map<String, dynamic> json,
 ) => CharacterResponseModel(
-  characters: (json['characters'] as List<dynamic>)
+  characters: (_getCharacters(json, 'characters') as List<dynamic>)
       .map((e) => CharacterModel.fromJson(e as Map<String, dynamic>))
       .toList(),
   currentPage: (json['currentPage'] as num).toInt(),

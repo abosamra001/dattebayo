@@ -8,11 +8,13 @@ class ExploreMoreItem extends StatelessWidget {
   final String label;
   final FaIconData icon;
   final VoidCallback onTap;
+  final bool useFullWidth;
   const ExploreMoreItem({
     super.key,
     required this.label,
     required this.icon,
     required this.onTap,
+    this.useFullWidth = false,
   });
 
   @override
@@ -23,7 +25,7 @@ class ExploreMoreItem extends StatelessWidget {
       highlightColor: ColorManager.mainColor.withValues(alpha: 0.2),
       borderRadius: BorderRadius.circular(12.r),
       child: Container(
-        width: 160.w,
+        width: useFullWidth ? double.infinity : 160.w,
         height: 116.h,
         alignment: .center,
         decoration: BoxDecoration(
