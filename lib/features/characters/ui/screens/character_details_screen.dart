@@ -41,7 +41,7 @@ class CharacterDetailsScreen extends StatelessWidget {
                 name: character.name ?? 'Ninja',
                 occupation:
                     character.personal?.occupation?.firstOrNull ?? 'Shinopi',
-                image: character.images?.firstOrNull ?? '',
+                images: character.images ?? [],
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),

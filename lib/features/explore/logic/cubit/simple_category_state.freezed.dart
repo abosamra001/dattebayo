@@ -128,12 +128,12 @@ return simpleError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  simpleLoading,TResult Function( List<SimpleCategoryModel> data,  bool isLoadingMore)?  simpleSuccess,TResult Function( String error)?  simpleError,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  simpleLoading,TResult Function( List<SimpleCategoryModel> data)?  simpleSuccess,TResult Function( String error)?  simpleError,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case SimpleLoading() when simpleLoading != null:
 return simpleLoading();case SimpleSuccess() when simpleSuccess != null:
-return simpleSuccess(_that.data,_that.isLoadingMore);case SimpleError() when simpleError != null:
+return simpleSuccess(_that.data);case SimpleError() when simpleError != null:
 return simpleError(_that.error);case _:
   return orElse();
 
@@ -152,12 +152,12 @@ return simpleError(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  simpleLoading,required TResult Function( List<SimpleCategoryModel> data,  bool isLoadingMore)  simpleSuccess,required TResult Function( String error)  simpleError,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  simpleLoading,required TResult Function( List<SimpleCategoryModel> data)  simpleSuccess,required TResult Function( String error)  simpleError,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case SimpleLoading():
 return simpleLoading();case SimpleSuccess():
-return simpleSuccess(_that.data,_that.isLoadingMore);case SimpleError():
+return simpleSuccess(_that.data);case SimpleError():
 return simpleError(_that.error);case _:
   throw StateError('Unexpected subclass');
 
@@ -175,12 +175,12 @@ return simpleError(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  simpleLoading,TResult? Function( List<SimpleCategoryModel> data,  bool isLoadingMore)?  simpleSuccess,TResult? Function( String error)?  simpleError,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  simpleLoading,TResult? Function( List<SimpleCategoryModel> data)?  simpleSuccess,TResult? Function( String error)?  simpleError,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case SimpleLoading() when simpleLoading != null:
 return simpleLoading();case SimpleSuccess() when simpleSuccess != null:
-return simpleSuccess(_that.data,_that.isLoadingMore);case SimpleError() when simpleError != null:
+return simpleSuccess(_that.data);case SimpleError() when simpleError != null:
 return simpleError(_that.error);case _:
   return null;
 
@@ -257,7 +257,7 @@ String toString() {
 
 
 class SimpleSuccess implements SimpleCategoryState {
-  const SimpleSuccess({required final  List<SimpleCategoryModel> data, required this.isLoadingMore}): _data = data;
+  const SimpleSuccess({required final  List<SimpleCategoryModel> data}): _data = data;
   
 
  final  List<SimpleCategoryModel> _data;
@@ -267,7 +267,6 @@ class SimpleSuccess implements SimpleCategoryState {
   return EqualUnmodifiableListView(_data);
 }
 
- final  bool isLoadingMore;
 
 /// Create a copy of SimpleCategoryState
 /// with the given fields replaced by the non-null parameter values.
@@ -279,16 +278,16 @@ $SimpleSuccessCopyWith<SimpleSuccess> get copyWith => _$SimpleSuccessCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SimpleSuccess&&const DeepCollectionEquality().equals(other._data, _data)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SimpleSuccess&&const DeepCollectionEquality().equals(other._data, _data));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_data),isLoadingMore);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_data));
 
 @override
 String toString() {
-  return 'SimpleCategoryState.simpleSuccess(data: $data, isLoadingMore: $isLoadingMore)';
+  return 'SimpleCategoryState.simpleSuccess(data: $data)';
 }
 
 
@@ -299,7 +298,7 @@ abstract mixin class $SimpleSuccessCopyWith<$Res> implements $SimpleCategoryStat
   factory $SimpleSuccessCopyWith(SimpleSuccess value, $Res Function(SimpleSuccess) _then) = _$SimpleSuccessCopyWithImpl;
 @useResult
 $Res call({
- List<SimpleCategoryModel> data, bool isLoadingMore
+ List<SimpleCategoryModel> data
 });
 
 
@@ -316,11 +315,10 @@ class _$SimpleSuccessCopyWithImpl<$Res>
 
 /// Create a copy of SimpleCategoryState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? data = null,Object? isLoadingMore = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? data = null,}) {
   return _then(SimpleSuccess(
 data: null == data ? _self._data : data // ignore: cast_nullable_to_non_nullable
-as List<SimpleCategoryModel>,isLoadingMore: null == isLoadingMore ? _self.isLoadingMore : isLoadingMore // ignore: cast_nullable_to_non_nullable
-as bool,
+as List<SimpleCategoryModel>,
   ));
 }
 

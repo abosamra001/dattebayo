@@ -10,7 +10,6 @@ class SimpleCategoryState with _$SimpleCategoryState {
   const factory SimpleCategoryState.simpleLoading() = SimpleLoading;
   const factory SimpleCategoryState.simpleSuccess({
     required List<SimpleCategoryModel> data,
-    required bool isLoadingMore,
   }) = SimpleSuccess;
   const factory SimpleCategoryState.simpleError(String error) = SimpleError;
 }

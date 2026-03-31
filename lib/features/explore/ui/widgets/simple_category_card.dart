@@ -11,12 +11,14 @@ class SimpleCategoryCard extends StatelessWidget {
   final String subTitle;
   final Color color;
   final int index;
+  final VoidCallback onTap;
   const SimpleCategoryCard({
     super.key,
     required this.title,
     required this.subTitle,
     required this.color,
     required this.index,
+    required this.onTap,
   });
 
   @override
@@ -24,7 +26,7 @@ class SimpleCategoryCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: 8.w, right: 8.w, bottom: 24.h),
       child: GestureDetector(
-        onTap: () {},
+        onTap: onTap,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
           decoration: BoxDecoration(

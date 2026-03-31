@@ -5,13 +5,12 @@ import 'package:dattebayo/features/characters/logic/characters_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../core/helpers/spacer.dart';
 import '../../../../core/themes/app_text_styles.dart';
 import '../../../../core/themes/colors.dart';
 import '../../../../core/widgets/top_search_bar.dart';
-import '../widgets/characters_grid_view.dart';
+import '../widgets/all_characters_grid_view.dart';
 
 class AllCharactersScreen extends StatefulWidget {
   const AllCharactersScreen({super.key});
@@ -46,15 +45,6 @@ class _AllCharactersScreenState extends State<AllCharactersScreen> {
           ),
           centerTitle: true,
           foregroundColor: ColorManager.mainColor,
-          actions: [
-            IconButton(
-              onPressed: () {
-                context.read<CharactersCubit>().filterByName();
-              },
-              icon: const FaIcon(FontAwesomeIcons.arrowDownShortWide),
-            ),
-          ],
-          actionsPadding: const EdgeInsets.only(right: 16),
           scrolledUnderElevation: 0,
         ),
         body: Padding(
@@ -73,7 +63,7 @@ class _AllCharactersScreenState extends State<AllCharactersScreen> {
                 hintText: 'Search in narturo characters',
               ),
               verticalSpace(16),
-              const Expanded(child: CharactersGridView()),
+              const Expanded(child: AllCharactersGridView()),
             ],
           ),
         ),

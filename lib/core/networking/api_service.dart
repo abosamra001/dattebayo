@@ -16,6 +16,11 @@ abstract class ApiService {
     @Query('page') int? page,
   });
 
+  @GET(ApiConstants.charactersById)
+  Future<List<CharacterModel>> getCharactersById({
+    @Path('id') String? charactersIds,
+  });
+
   @GET(ApiConstants.allCharacters)
   Future<CharacterResponseModel> searchCharactersByName({
     @Query('name') String? name,
