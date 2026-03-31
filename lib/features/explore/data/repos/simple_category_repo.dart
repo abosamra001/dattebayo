@@ -24,11 +24,11 @@ class SimpleCategoryRepo {
           limit: limit,
           page: page,
         ),
-        SimpleCategoryType.kekkeiGenkai => apiService.getAllTeams(
+        SimpleCategoryType.teams => apiService.getAllTeams(
           limit: limit,
           page: page,
         ),
-        SimpleCategoryType.teams => apiService.getAllKekkeiGenkai(
+        SimpleCategoryType.kekkeiGenkai => apiService.getAllKekkeiGenkai(
           limit: limit,
           page: page,
         ),

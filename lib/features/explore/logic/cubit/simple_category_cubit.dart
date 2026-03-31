@@ -12,41 +12,23 @@ class SimpleCategoryCubit extends Cubit<SimpleCategoryState> {
   SimpleCategoryCubit({required this.repo})
     : super(const SimpleCategoryState.initial());
 
-  final List<SimpleCategoryModel> _data = [];
-  int _page = 1;
-  bool _hasMore = true;
-  bool _isFetching = false;
-
-  void getSimpleCategory({
-    required SimpleCategoryType categoryType,
-    int? limit = 10,
-  }) async {
-    if (_isFetching || !_hasMore) return;
-    _isFetching = true;
-
-    if (_page == 1) {
-      emit(const SimpleCategoryState.simpleLoading());
-    } else {
-      emit(SimpleCategoryState.simpleSuccess(data: _data, isLoadingMore: true));
-    }
-
+  void getSimpleCategory({required SimpleCategoryType categoryType}) async {
+    emit(const SimpleCategoryState.simpleLoading());
     final res = await repo.getSimpleCategory(
       categoryType: categoryType,
-      limit: limit,
-      page: _page,
+      limit: 200,
+      page: 1,
     );
 
     res.when(
-      success: (response) {
-        _page++;
-        _hasMore = response.data.length == limit;
-        _data.addAll(response.data);
-        emit(
-          SimpleCategoryState.simpleSuccess(data: _data, isLoadingMore: false),
+      success: (model) {
+        final allData = List<SimpleCategoryModel>.from(model.data);
+        allData.sort(
+          (a, b) => b.characters.length.compareTo(a.characters.length),
         );
+        emit(SimpleCategoryState.simpleSuccess(data: allData));
       },
       failure: (error) => emit(SimpleCategoryState.simpleError(error)),
     );
-    _isFetching = false;
   }
 }

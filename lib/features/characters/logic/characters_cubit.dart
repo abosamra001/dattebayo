@@ -42,10 +42,43 @@ class CharactersCubit extends Cubit<CharactersState> {
     _isFetching = false;
   }
 
-  void filterByName() async {
-    final copy = List.from(characters).cast<CharacterModel>();
-    copy.sort((a, b) => a.name!.compareTo(b.name!));
-    emit(CharactersState.charactersSuccess(characters: copy));
+  int _index = 0;
+  List<int> _cachedIds = [];
+  void getCharactersById({List<int>? ids, int length = 20}) async {
+    if (ids != null) {
+      _cachedIds = ids;
+      _index = 0;
+      characters.clear();
+      _hasMore = true;
+    }
+    if (_cachedIds.isNullOrEmpty) return;
+    if (!_hasMore || _isFetching) return;
+
+    _isFetching = true;
+    if (_index == 0) {
+      emit(CharactersState.charactersLoading());
+    } else {
+      emit(CharactersState.charactersLoadingMore(characters: characters));
+    }
+    final currentChunck = _getChuck(_cachedIds, length);
+    final res = await repo.getCharacterById(ids: currentChunck);
+    res.when(
+      success: (model) {
+        _hasMore = _index < _cachedIds.length;
+        characters.addAll(model);
+        emit(CharactersState.charactersSuccess(characters: characters));
+      },
+      failure: (error) => emit(CharactersState.charactersError(error)),
+    );
+    _isFetching = false;
+  }
+
+  String _getChuck(List<int> ids, int length) {
+    // trilling , is for making sure the api call fetches the entered
+    // ids list not all characters endpoint
+    final chunk = ids.skip(_index).take(length).toList();
+    _index += chunk.length;
+    return '${chunk.join(',')},';
   }
 
   Future<void> searchCharactersByName({String? name, int? limit = 20}) async {
@@ -53,7 +86,6 @@ class CharactersCubit extends Cubit<CharactersState> {
       _lastQuery = name;
       clearSearchList();
     }
-    // extension for checking if string is null or empty (after beening trimed)
     if (_lastQuery.isNullOrEmpty) {
       emit(CharactersState.charactersSuccess(characters: characters));
       return;

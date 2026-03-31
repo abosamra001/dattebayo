@@ -1,7 +1,7 @@
-import 'package:dattebayo/core/networking/api_error_handler.dart';
-import 'package:dattebayo/core/networking/api_result.dart';
-import 'package:dattebayo/core/networking/api_service.dart';
-import 'package:dattebayo/features/characters/data/models/character_response_model.dart';
+import '../../../../core/networking/api_error_handler.dart';
+import '../../../../core/networking/api_result.dart';
+import '../../../../core/networking/api_service.dart';
+import '../models/character_response_model.dart';
 
 class CharactersRepo {
   final ApiService apiService;
@@ -11,27 +11,25 @@ class CharactersRepo {
   Future<ApiResult<CharacterResponseModel>> getAllCharacters({
     int? limit,
     int? page,
-  }) async {
-    try {
-      final res = await apiService.getAllCharacters(limit: limit, page: page);
-      return ApiResult.success(res);
-    } catch (error) {
-      return ApiResult.failure(ApiErrorHandler.handle(error));
-    }
-  }
+  }) =>
+      _serviceCall(() => apiService.getAllCharacters(limit: limit, page: page));
+
+  Future<ApiResult<List<CharacterModel>>> getCharacterById({
+    required String ids,
+  }) => _serviceCall(() => apiService.getCharactersById(charactersIds: ids));
 
   Future<ApiResult<CharacterResponseModel>> searchCharactersByName({
     String? name,
     int? limit,
     int? page,
-  }) async {
+  }) => _serviceCall(
+    () =>
+        apiService.searchCharactersByName(name: name, limit: limit, page: page),
+  );
+
+  Future<ApiResult<T>> _serviceCall<T>(Future<T> Function() call) async {
     try {
-      final res = await apiService.searchCharactersByName(
-        name: name,
-        limit: limit,
-        page: page,
-      );
-      return ApiResult.success(res);
+      return ApiResult.success(await call());
     } catch (e) {
       return ApiResult.failure(ApiErrorHandler.handle(e));
     }

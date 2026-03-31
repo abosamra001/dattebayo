@@ -1,6 +1,7 @@
 class ApiConstants {
   static const String baseUrl = 'https://dattebayo-api.onrender.com/';
   static const String allCharacters = 'characters';
+  static const String charactersById = 'characters/{id}';
 
   //simple category
   static const String allClans = 'clans';
