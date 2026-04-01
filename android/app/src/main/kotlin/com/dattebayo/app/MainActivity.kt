@@ -1,4 +1,4 @@
-package com.example.dattebayo
+package com.dattebayo.app
 
 import io.flutter.embedding.android.FlutterActivity
 
