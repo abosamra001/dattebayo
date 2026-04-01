@@ -1,17 +1,57 @@
-# dattebayo
+# 🌀 Dattebayo App
 
-A new Flutter project.
+A modern mobile application built with Flutter that brings the Naruto universe to your fingertips. Explore characters, clans, kekkei genkai, and more through a smooth and clean user experience.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 📱 Features
 
-A few resources to get you started if this is your first Flutter project:
+- 🔍 Browse Naruto characters, clans, villages, teams...
+- ⚡ Fast and responsive UI
+- 🎨 Clean and modern design
+- 🔎 Search functionality
+- 📡 API integration with real-time data
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🛠️ Tech Stack
+
+- Flutter & Dart
+- Cubit (Bloc)
+- REST API
+- Clean Architecture
+
+---
+
+## 📦 Download
+
+### APKs:
+- `arm64-v8a` → Recommended for most devices
+- `armeabi-v7a` → For older devices
+
+Check the **Releases** section to download.
+
+---
+
+## 📸 Screenshots
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/286a63ef-267f-4392-9033-f24d42ece8cf" width="150">
+  <img src="https://github.com/user-attachments/assets/41a9ef83-9fca-477b-bcba-d2ff6b6716d6" width="150">
+  <img src="https://github.com/user-attachments/assets/bb9a06bf-7c6e-4b9c-96d7-06790df7150b" width="150">
+  <img src="https://github.com/user-attachments/assets/cb0f0688-9cb4-447b-a792-a362f6122f05" width="150">
+  <img src="https://github.com/user-attachments/assets/2c43ea86-9861-4c58-9f46-3285083618cc" width="150">
+</p>
+
+---
+
+## 🌐 API & Credits
+
+This project is powered by the [Dattebayo API](https://github.com/viniciusschuelter/dattebayo-api).
+
+Special thanks to the original project for providing such a rich Naruto data source:
+
+[Dattebayo website](https://dattebayo-oo64upii7-viniciusschuelter.vercel.app/).
+
+This mobile app is a client built on top of their API and is not affiliated with the original creators.
+
+---
