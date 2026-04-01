@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dattebayo/core/helpers/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -56,7 +55,6 @@ class _DetailsCardImageState extends State<DetailsCardImage> {
                     placeholder: (context, url) =>
                         const Center(child: UzumakiLoadingIndicator()),
                     errorWidget: (context, url, error) {
-                      Logger.printG(error.toString());
                       return _buildErrorWidget();
                     },
                   ),
